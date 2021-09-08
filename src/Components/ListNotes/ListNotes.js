@@ -14,7 +14,12 @@ const ListNotes = () => {
         <div>Title </div>
         <div>Date</div>
       </div>
-      <button className="ListNotes_button">+ New</button>
+      <button
+        className="ListNotes_button"
+        onClick={() => dispatch(selectNote(-1))}
+      >
+        + New
+      </button>
       <div>
         {notes.map((item, index) => (
           <div

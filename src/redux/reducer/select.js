@@ -1,6 +1,6 @@
 import { SELECT_NOTE } from "../actionTypes";
 
-const initialState = 0;
+const initialState = -1;
 export const select = (state = initialState, action) => {
   switch (action.type) {
     case SELECT_NOTE:

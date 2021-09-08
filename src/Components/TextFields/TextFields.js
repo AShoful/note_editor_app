@@ -1,12 +1,25 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addNote } from "../../redux/action/action";
 import "./TextFields.css";
 
 const TextFields = () => {
+  const select = useSelector((state) => state.select);
+  console.log(select);
+  const notes = useSelector((state) => state.notes);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (select >= 0) {
+      setDescription(notes[select].title);
+      setTitle(notes[select].title);
+    } else {
+      setTitle("");
+      setDescription("");
+    }
+  }, [notes, select]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
