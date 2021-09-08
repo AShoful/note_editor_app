@@ -1,10 +1,12 @@
 import TextFields from "./Components/TextFields/TextFields";
+import ListNotes from "./Components/ListNotes/ListNotes";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <ListNotes />
         <TextFields />
       </header>
       {/* <span className="material-icons">play_circle_outline</span>

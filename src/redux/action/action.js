@@ -3,6 +3,7 @@ import {
   DELETE_NOTE,
   UPDATE_NOTE,
   SEARCH_NOTE,
+  SELECT_NOTE,
 } from "../actionTypes";
 
 // --- action notes
@@ -28,4 +29,11 @@ export const updateNote = (id, value) => ({
 export const searchNote = (search) => ({
   type: SEARCH_NOTE,
   search,
+});
+
+// --- action select
+
+export const selectNote = (select) => ({
+  type: SELECT_NOTE,
+  select,
 });

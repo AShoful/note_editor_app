@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNote } from "../../redux/action/action";
 import "./TextFields.css";

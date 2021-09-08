@@ -1,0 +1,28 @@
+.ListNotes {
+  min-height: 100vh;
+  /* border: 1px solid white; */
+  width: 30%;
+  margin: 2px auto;
+}
+
+.ListNotes_sortfields {
+  display: flex;
+  padding-left: 10px;
+  justify-content: space-between;
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.ListNotes_button {
+  border: 1px solid white;
+  background-color: #282c34;
+  color: white;
+  margin: 15px;
+}
+
+.ListNotes_title {
+  border: 1px solid white;
+  height: 30px;
+  margin-bottom: 10px;
+  width: 60%;
+}
