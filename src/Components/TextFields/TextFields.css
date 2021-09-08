@@ -1,0 +1,57 @@
+.TextFields {
+  margin: 5px;
+  width: 50%;
+}
+
+.TextFields_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid white;
+  /* padding: 0 5px; */
+  /* height: 30px; */
+}
+
+.TextFields_div {
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
+}
+
+.TextFields_input {
+  border: 1px solid white;
+  background-color: #282c34;
+  color: white;
+  outline: none;
+  width: 65%;
+  margin: 15px;
+  padding: 0 5px;
+  height: 24px;
+  font-size: 18px;
+}
+
+.TextFields_textarea {
+  border: 1px solid white;
+  background-color: #282c34;
+  color: white;
+  outline: none;
+  width: 95%;
+  margin: 15px;
+  padding: 0 5px;
+  /* height: 200px; */
+  font-size: 18px;
+}
+
+.TextFields_button {
+  border: 1px solid white;
+  background-color: #282c34;
+  color: white;
+  margin: 15px;
+}
+
+@media (max-width: 560px) {
+  .TextFields {
+    width: 95%;
+  }
+}
