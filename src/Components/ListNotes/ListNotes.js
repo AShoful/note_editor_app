@@ -2,7 +2,6 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { selectNote } from "../../redux/action/action";
-import Search from "../Search/Search";
 import "./ListNotes.css";
 
 const ListNotes = () => {
@@ -30,7 +29,9 @@ const ListNotes = () => {
         {notesAfterSearch.map((item, index) => (
           <div
             key={item.id}
-            className="ListNotes_title"
+            className={
+              index !== select ? "ListNotes_title" : "ListNotes_title light"
+            }
             onClick={() => dispatch(selectNote(index))}
           >
             {item.title}
