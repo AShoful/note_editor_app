@@ -6,8 +6,9 @@ import "./ListNotes.css";
 
 const ListNotes = () => {
   const notes = useSelector((state) => state.notes);
+  const select = useSelector((state) => state.select);
   const dispatch = useDispatch();
-  console.log(notes);
+
   return (
     <div className="ListNotes">
       <div className="ListNotes_sortfields">
@@ -16,6 +17,7 @@ const ListNotes = () => {
       </div>
       <button
         className="ListNotes_button"
+        disabled={select === -1}
         onClick={() => dispatch(selectNote(-1))}
       >
         + New

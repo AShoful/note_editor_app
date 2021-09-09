@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNote, updateNote } from "../../redux/action/action";
+import {
+  addNote,
+  updateNote,
+  deleteNote,
+  selectNote,
+} from "../../redux/action/action";
 import "./TextFields.css";
 
 const TextFields = () => {
-  const select = useSelector((state) => state.select);
-  console.log(select);
+  let select = useSelector((state) => state.select);
   const notes = useSelector((state) => state.notes);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (select === notes.length) {
+      select = notes.length - 1;
+      dispatch(selectNote(notes.length - 1));
+    }
     if (select >= 0) {
       setTitle(notes[select].title);
       setDescription(notes[select].description);
@@ -41,18 +49,31 @@ const TextFields = () => {
     }
   };
 
+  const hamdleRemote = (select) => {
+    if (select === -1) {
+      return;
+    }
+    // let curentIndex = select === notes.length ? notes.length - 1 : select;
+    let del = notes[select].id;
+    dispatch(deleteNote(del));
+  };
+
   return (
     <div className="TextFields">
       <input className="TextFields_input" type="text" />
-      <form className="TextFields_form" onSubmit={handleSubmit}>
+      <form
+        className="TextFields_form"
+        onSubmit={(e) => handleSubmit(e, select)}
+      >
         <div className="TextFields_div">
           <p>Title</p>
-          <span className="material-icons">delete</span>
+          <span className="material-icons" onClick={() => hamdleRemote(select)}>
+            delete
+          </span>
         </div>
         <input
           className="TextFields_input"
           type="text"
-          // placeholder="title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
@@ -61,7 +82,6 @@ const TextFields = () => {
           className="TextFields_textarea"
           rows="10"
           type="text"
-          // placeholder="description"
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />
