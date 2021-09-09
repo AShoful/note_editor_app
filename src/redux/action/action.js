@@ -18,10 +18,10 @@ export const deleteNote = (id) => ({
   id,
 });
 
-export const updateNote = (id, value) => ({
+export const updateNote = (id, data) => ({
   type: UPDATE_NOTE,
   id,
-  value,
+  data,
 });
 
 // --- action search

@@ -28,7 +28,7 @@
   margin: 15px;
   padding: 0 5px;
   height: 24px;
-  font-size: 18px;
+  /* font-size: 18px; */
 }
 
 .TextFields_textarea {
@@ -40,13 +40,14 @@
   margin: 15px;
   padding: 0 5px;
   /* height: 200px; */
-  font-size: 18px;
+  /* font-size: 18px; */
 }
 
 .TextFields_button {
   border: 1px solid white;
   background-color: #282c34;
   color: white;
+  padding: 5px 25px;
   margin: 15px;
 }
 
