@@ -8,7 +8,7 @@ const Search = () => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setSearch(() => {
+    setSearch((prev) => {
       const str = e.target.value;
       dispatch(searchNote(str.trim()));
       return str;
