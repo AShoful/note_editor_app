@@ -2,13 +2,17 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { selectNote } from "../../redux/action/action";
+import Search from "../Search/Search";
 import "./ListNotes.css";
 
 const ListNotes = () => {
   const notes = useSelector((state) => state.notes);
   const select = useSelector((state) => state.select);
+  const search = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
+  const notesAfterSearch =
+    search === "" ? notes : notes.filter((item) => item.title.includes(search));
   return (
     <div className="ListNotes">
       <div className="ListNotes_sortfields">
@@ -23,7 +27,7 @@ const ListNotes = () => {
         + New
       </button>
       <div>
-        {notes.map((item, index) => (
+        {notesAfterSearch.map((item, index) => (
           <div
             key={item.id}
             className="ListNotes_title"

@@ -7,20 +7,22 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
-  const handleSubmit = (e, search) => {
-    e.preventDefault();
-    dispatch(searchNote(search.trim()));
-    setSearch("");
+  const handleChange = (e) => {
+    setSearch((prev) => {
+      const str = e.target.value;
+      dispatch(searchNote(str.trim()));
+      return str;
+    });
   };
 
   return (
     <div className="Search">
-      <form className="Search_form" onSubmit={(e) => handleSubmit(e, search)}>
+      <form className="Search_form">
         <input
           className="Search_input"
           type="text"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleChange}
         />
       </form>
     </div>
