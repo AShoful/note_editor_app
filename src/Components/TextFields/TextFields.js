@@ -49,6 +49,10 @@ const TextFields = () => {
     dispatch(removeNote(del, select === notes.length - 1, select));
   };
 
+  const validate = (str, right, left) => {
+    return str.length > right && str.length < left ? true : false;
+  };
+
   return (
     <div className="TextFields">
       <Search />
@@ -57,7 +61,7 @@ const TextFields = () => {
         onSubmit={(e) => handleSubmit(e, select)}
       >
         <div className="TextFields_div">
-          <p>Title</p>
+          <p>Title {validate(title, 3, 10) || "error"}</p>
           <span className="material-icons" onClick={() => hamdleRemote(select)}>
             delete
           </span>
@@ -69,6 +73,7 @@ const TextFields = () => {
           value={title}
         />
         <p>Description</p>
+        {validate(description, 3, 150) || "error"}
         <textarea
           className="TextFields_textarea"
           rows="10"
@@ -79,6 +84,7 @@ const TextFields = () => {
         <button
           className="TextFields_button"
           onClick={(e) => handleSubmit(e, select)}
+          disabled={!validate(description, 3, 120) || !validate(title, 3, 10)}
         >
           Save
         </button>

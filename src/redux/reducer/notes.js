@@ -8,7 +8,7 @@ const initialState = savedNotes && savedNotes.notes ? savedNotes.notes : [];
 export const notes = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NOTE:
-      return [...state, action.data];
+      return [action.data, ...state];
 
     // case UPDATE_NOTE: {
     //   const st = state.filter((item) => item.id === action.id)[0];
