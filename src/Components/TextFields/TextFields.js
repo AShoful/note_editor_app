@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addNote,
-  updateNote,
-  deleteNote,
-  selectNote,
-} from "../../redux/action/action";
+import { addNote, updateNote, removeNote } from "../../redux/action/action";
 import "./TextFields.css";
 
 const TextFields = () => {
@@ -16,11 +11,7 @@ const TextFields = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (select === notes.length) {
-      select = notes.length - 1;
-      dispatch(selectNote(notes.length - 1));
-    }
-    if (select >= 0) {
+    if (select !== -1) {
       setTitle(notes[select].title);
       setDescription(notes[select].description);
     } else {
@@ -53,9 +44,8 @@ const TextFields = () => {
     if (select === -1) {
       return;
     }
-    // let curentIndex = select === notes.length ? notes.length - 1 : select;
     let del = notes[select].id;
-    dispatch(deleteNote(del));
+    dispatch(removeNote(del, select === notes.length - 1, select));
   };
 
   return (

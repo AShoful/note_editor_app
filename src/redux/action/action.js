@@ -24,6 +24,15 @@ export const updateNote = (id, data) => ({
   data,
 });
 
+export const removeNote = (id, isEnd, select) => {
+  return async (dispatch) => {
+    dispatch(deleteNote(id));
+    if (isEnd) {
+      dispatch(selectNote(select - 1));
+    }
+  };
+};
+
 // --- action search
 
 export const searchNote = (search) => ({

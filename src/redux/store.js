@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
+import thunkMiddleware from "redux-thunk";
 import { combinedReducer } from "./reducer";
 import { save } from "redux-localstorage-simple";
 
@@ -11,7 +12,9 @@ const configureStore = (preloadedState) =>
   createStore(
     combinedReducer,
     preloadedState,
-    composeEnhancers(applyMiddleware(save({ namespace: "note-list" })))
+    composeEnhancers(
+      applyMiddleware(thunkMiddleware, save({ namespace: "note-list" }))
+    )
   );
 
 export const store = configureStore({});
