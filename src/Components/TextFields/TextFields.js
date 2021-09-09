@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Search from "../Search/Search";
 import { addNote, updateNote, removeNote } from "../../redux/action/action";
 import "./TextFields.css";
 
@@ -50,7 +51,7 @@ const TextFields = () => {
 
   return (
     <div className="TextFields">
-      <input className="TextFields_input" type="text" />
+      <Search />
       <form
         className="TextFields_form"
         onSubmit={(e) => handleSubmit(e, select)}

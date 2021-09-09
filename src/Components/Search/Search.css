@@ -1,0 +1,11 @@
+.Search_input {
+  border: 1px solid white;
+  background-color: #282c34;
+  color: white;
+  outline: none;
+  width: 65%;
+  margin: 15px;
+  padding: 0 5px;
+  height: 24px;
+  /* font-size: 18px; */
+}
