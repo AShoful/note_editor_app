@@ -1,7 +1,6 @@
 .TextFields {
   margin: 5px;
   width: 55%;
-  /* max-width: 100vh; */
 }
 
 .TextFields_form {
@@ -28,33 +27,24 @@
 
 .TextFields_input {
   border: 1px solid white;
-  background-color: inherit;
-  color: inherit;
   width: 65%;
   margin-left: 15px;
   padding: 0 10px;
   height: 24px;
-  font-family: inherit;
 }
 
 .TextFields_textarea {
   border: 1px solid white;
-  background-color: inherit;
   width: 90%;
-  color: inherit;
   margin: 0 auto;
   padding: 0 10px;
-  font-family: inherit;
 }
 
 .TextFields_button {
   border: 1px solid white;
-  background-color: inherit;
-  color: inherit;
   padding: 5px 25px;
   margin: 15px auto;
   width: 150px;
-  font-family: inherit;
 }
 
 .TextFields_button:disabled {
