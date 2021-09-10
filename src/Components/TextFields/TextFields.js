@@ -12,6 +12,7 @@ const TextFields = () => {
   // const notes = useSelector((state) => state.notes);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [touch, setTouch] = useState(false);
   const dispatch = useDispatch();
 
   const notes = searchInNotes(notesInStore, search);
@@ -72,7 +73,7 @@ const TextFields = () => {
         <div className="TextFields_div">
           <div>
             <p className="TextFields_p">Title</p>
-            {validate(title, 3, 40) || (
+            {validate(title, 3, 40, touch) || (
               <small className="TextFields_small">
                 the length TITLE must be between 3 and 40 characters
               </small>
@@ -85,11 +86,14 @@ const TextFields = () => {
         <input
           className="TextFields_input"
           type="text"
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            setTouch(true);
+          }}
           value={title}
         />
         <p className="TextFields_p">Description</p>
-        {validate(description, 3, 150) || (
+        {validate(description, 3, 150, touch) || (
           <small className="TextFields_small">
             the length DESCRIPTION must be between 3 and 40 characters
           </small>
@@ -98,14 +102,17 @@ const TextFields = () => {
           className="TextFields_textarea"
           rows="6"
           type="text"
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => {
+            setDescription(e.target.value);
+            setTouch(true);
+          }}
           value={description}
         />
         <button
           className="TextFields_button"
           onClick={(e) => handleSubmit(e, select)}
           disabled={
-            !validate(description, 3, 120) || !validate(title, 3, 30)
+            !validate(description, 3, 120) || !validate(title, 3, 30) || touch
             // objectIsEmpty(select)
           }
         >
