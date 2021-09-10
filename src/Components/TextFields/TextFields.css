@@ -1,6 +1,8 @@
 .TextFields {
   margin: 5px;
   width: 55%;
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .TextFields_form {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { searchNote, selectNote, addNote } from "../../redux/action/action";
+import { selectNote, addNote } from "../../redux/action/action";
 import { searchInNotes } from "../functions";
 import "./ListNotes.css";
 
@@ -73,11 +73,7 @@ const ListNotes = () => {
         </div>
         <div onClick={handleSortByDate}>Date {viewSort(sortByDate)}</div>
       </div>
-      <button
-        className="ListNotes_button"
-        disabled={select === -1}
-        onClick={handleAddNewNote}
-      >
+      <button className="ListNotes_button" onClick={handleAddNewNote}>
         + New
       </button>
       <div>

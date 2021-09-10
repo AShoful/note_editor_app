@@ -7,7 +7,6 @@ function App() {
     <div className="App">
       <ListNotes />
       <TextFields />
-      {/* <span className="material-icons">manage_search</span> */}
     </div>
   );
 }

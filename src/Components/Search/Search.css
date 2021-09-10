@@ -2,7 +2,7 @@
   display: flex;
   width: 70%;
   border: 1px solid white;
-  margin: 15px;
+  margin: 15px 0;
 }
 
 .Search_input {

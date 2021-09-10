@@ -29,6 +29,7 @@ const TextFields = () => {
 
   const handleSubmit = (e, select) => {
     e.preventDefault();
+    setTouch(false);
     if (objectIsEmpty(select)) {
       const dataAdd = {
         id: Date.now(),
@@ -73,9 +74,9 @@ const TextFields = () => {
         <div className="TextFields_div">
           <div>
             <p className="TextFields_p">Title</p>
-            {validate(title, 3, 40, touch) || (
+            {validate(title, 3, 120, touch) || !touch || (
               <small className="TextFields_small">
-                the length TITLE must be between 3 and 40 characters
+                the length TITLE must be between 3 and 120 characters
               </small>
             )}
           </div>
@@ -88,14 +89,14 @@ const TextFields = () => {
           type="text"
           onChange={(e) => {
             setTitle(e.target.value);
-            setTouch(true);
+            if (!touch) setTouch(true);
           }}
           value={title}
         />
         <p className="TextFields_p">Description</p>
-        {validate(description, 3, 150, touch) || (
+        {validate(description, 5, 500) || !touch || (
           <small className="TextFields_small">
-            the length DESCRIPTION must be between 3 and 40 characters
+            the length DESCRIPTION must be between 5 and 500 characters
           </small>
         )}
         <textarea
@@ -104,7 +105,7 @@ const TextFields = () => {
           type="text"
           onChange={(e) => {
             setDescription(e.target.value);
-            setTouch(true);
+            if (!touch) setTouch(true);
           }}
           value={description}
         />
@@ -112,7 +113,7 @@ const TextFields = () => {
           className="TextFields_button"
           onClick={(e) => handleSubmit(e, select)}
           disabled={
-            !validate(description, 3, 120) || !validate(title, 3, 30) || touch
+            !validate(description, 5, 500) || !validate(title, 3, 120)
             // objectIsEmpty(select)
           }
         >
