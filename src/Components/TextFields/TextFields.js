@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../Search/Search";
 import { addNote, updateNote, removeNote } from "../../redux/action/action";
-import { objectIsEmpty, validate } from "../functions";
+import { objectIsEmpty, validate, searchInNotes } from "../functions";
 import "./TextFields.css";
 
 const TextFields = () => {
   let select = useSelector((state) => state.select);
-  // const search = useSelector((state) => state.search);
-  // const notesInStore = useSelector((state) => state.notes);
-  const notes = useSelector((state) => state.notes);
+  const search = useSelector((state) => state.search);
+  const notesInStore = useSelector((state) => state.notes);
+  // const notes = useSelector((state) => state.notes);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
 
-  // const notes = searchInNotes(notesInStore, search);
+  const notes = searchInNotes(notesInStore, search);
 
   useEffect(() => {
     if (!objectIsEmpty(select)) {
@@ -50,10 +50,10 @@ const TextFields = () => {
     if (objectIsEmpty(select)) {
       return;
     }
-    const indexSelect = notes.indexOf(select);
     if (notes.length === 1) {
       return dispatch(removeNote(notes[0].id, {}, true));
     }
+    const indexSelect = notes.indexOf(select);
     if (indexSelect === notes.length - 1) {
       return dispatch(
         removeNote(notes[indexSelect].id, notes[indexSelect - 1], false)
@@ -65,17 +65,19 @@ const TextFields = () => {
     }
   };
 
-  console.log("newSelect", select);
-  console.log("newLeng", notes.length);
   return (
     <div className="TextFields">
       <Search />
-      <form
-        className="TextFields_form"
-        onSubmit={(e) => handleSubmit(e, select)}
-      >
+      <form className="TextFields_form">
         <div className="TextFields_div">
-          <p>Title {validate(title, 3, 40) || "error"}</p>
+          <div>
+            <p className="TextFields_p">Title</p>
+            {validate(title, 3, 40) || (
+              <small className="TextFields_small">
+                the length TITLE must be between 3 and 40 characters
+              </small>
+            )}
+          </div>
           <span className="material-icons" onClick={() => hamdleRemove(select)}>
             delete
           </span>
@@ -86,10 +88,15 @@ const TextFields = () => {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
-        <p>Description {validate(description, 3, 150) || "error"}</p>
+        <p className="TextFields_p">Description</p>
+        {validate(description, 3, 150) || (
+          <small className="TextFields_small">
+            the length DESCRIPTION must be between 3 and 40 characters
+          </small>
+        )}
         <textarea
           className="TextFields_textarea"
-          rows="10"
+          rows="6"
           type="text"
           onChange={(e) => setDescription(e.target.value)}
           value={description}

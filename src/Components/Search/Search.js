@@ -15,7 +15,7 @@ const Search = () => {
   }, [searchInStore]);
 
   const handleChange = (e) => {
-    setSearch((prev) => {
+    setSearch(() => {
       const str = e.target.value;
       dispatch(searchNote(str.trim()));
       return str;
@@ -37,6 +37,7 @@ const Search = () => {
           value={search}
           onChange={handleChange}
         />
+        <span className="material-icons">manage_search</span>
       </form>
     </div>
   );

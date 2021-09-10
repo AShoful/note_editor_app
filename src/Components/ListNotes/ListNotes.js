@@ -5,7 +5,7 @@ import { searchNote, selectNote, addNote } from "../../redux/action/action";
 import { searchInNotes } from "../functions";
 import "./ListNotes.css";
 
-const DEFAUL_NOTE = {
+const DEFAULT_NOTE = {
   title: "default title",
   description: "default description",
 };
@@ -59,8 +59,8 @@ const ListNotes = () => {
   };
 
   const handleAddNewNote = () => {
-    DEFAUL_NOTE.id = Date.now();
-    const data = { ...DEFAUL_NOTE };
+    DEFAULT_NOTE.id = Date.now();
+    const data = { ...DEFAULT_NOTE };
     dispatch(addNote(data));
     dispatch(selectNote(data));
   };
@@ -68,7 +68,9 @@ const ListNotes = () => {
   return (
     <div className="ListNotes">
       <div className="ListNotes_sortfields">
-        <div onClick={handleSortByTitle}>Title {viewSort(sortByTitle)}</div>
+        <div onClick={handleSortByTitle}>
+          <span>Title</span> {viewSort(sortByTitle)}
+        </div>
         <div onClick={handleSortByDate}>Date {viewSort(sortByDate)}</div>
       </div>
       <button
@@ -89,7 +91,7 @@ const ListNotes = () => {
             }
             onClick={() => {
               dispatch(selectNote(item));
-              dispatch(searchNote(""));
+              // dispatch(searchNote(""));
             }}
           >
             {item.title}
