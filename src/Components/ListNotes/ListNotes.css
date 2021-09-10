@@ -1,13 +1,12 @@
 .ListNotes {
   min-height: 100vh;
-  /* border: 1px solid white; */
-  width: 30%;
-  margin: 2px auto;
+  width: 45%;
+  margin: 15px auto;
 }
 
 .ListNotes_sortfields {
   display: flex;
-  padding-left: 10px;
+  padding-left: 15px;
   justify-content: space-between;
   width: 90%;
   margin-bottom: 20px;
@@ -15,18 +14,20 @@
 
 .ListNotes_button {
   border: 1px solid white;
-  background-color: #282c34;
-  color: white;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  width: 140px;
   margin: 15px;
 }
 
 .ListNotes_title {
   border: 1px solid white;
-  height: 30px;
-  margin-bottom: 10px;
-  width: 60%;
+  height: 45px;
+  margin: 15px;
+  width: 80%;
 }
 
 .highlight {
-  color: red;
+  border-color: rgb(73, 216, 80);
 }

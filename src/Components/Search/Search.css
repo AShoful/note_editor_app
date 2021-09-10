@@ -1,9 +1,17 @@
-.Search_input {
+.Search_form {
+  display: flex;
+  width: 70%;
   border: 1px solid white;
+  margin: 15px;
+}
+
+.Search_input {
+  border: none;
   background-color: inherit;
   color: inherit;
-  width: 65%;
-  margin: 15px;
+  width: 90%;
+  outline: none;
+  /* margin: 15px; */
   padding: 0 5px;
   height: 24px;
   font-family: inherit;
