@@ -2,19 +2,24 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../Search/Search";
 import { addNote, updateNote, removeNote } from "../../redux/action/action";
+import { objectIsEmpty } from "../functions";
 import "./TextFields.css";
 
 const TextFields = () => {
   let select = useSelector((state) => state.select);
+  // const search = useSelector((state) => state.search);
+  // const notesInStore = useSelector((state) => state.notes);
   const notes = useSelector((state) => state.notes);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
 
+  // const notes = searchInNotes(notesInStore, search);
+
   useEffect(() => {
-    if (select !== -1) {
-      setTitle(notes[select].title);
-      setDescription(notes[select].description);
+    if (!objectIsEmpty(select)) {
+      setTitle(select.title);
+      setDescription(select.description);
     } else {
       setTitle("");
       setDescription("");
@@ -23,7 +28,7 @@ const TextFields = () => {
 
   const handleSubmit = (e, select) => {
     e.preventDefault();
-    if (select === -1) {
+    if (objectIsEmpty(select)) {
       const dataAdd = {
         id: Date.now(),
         title,
@@ -37,22 +42,34 @@ const TextFields = () => {
         title,
         description,
       };
-      dispatch(updateNote(select, dataUpdate));
+      dispatch(updateNote(select.id, dataUpdate));
     }
   };
 
   const hamdleRemote = (select) => {
-    if (select === -1) {
+    if (objectIsEmpty(select)) {
       return;
     }
-    let del = notes[select].id;
-    dispatch(removeNote(del, select === notes.length - 1, select));
+    const indexSelect = notes.indexOf(select);
+    if (notes.length === 1) {
+      return dispatch(removeNote(notes[0].id, {}, true));
+    }
+    if (indexSelect === notes.length - 1) {
+      return dispatch(
+        removeNote(notes[indexSelect].id, notes[indexSelect - 1], false)
+      );
+    } else {
+      return dispatch(
+        removeNote(notes[indexSelect].id, notes[indexSelect + 1], false)
+      );
+    }
   };
 
   const validate = (str, right, left) => {
     return str.length > right && str.length < left ? true : false;
   };
-
+  console.log("newSelect", select);
+  console.log("newLeng", notes.length);
   return (
     <div className="TextFields">
       <Search />
@@ -72,8 +89,7 @@ const TextFields = () => {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
-        <p>Description</p>
-        {validate(description, 3, 150) || "error"}
+        <p>Description {validate(description, 3, 150) || "error"}</p>
         <textarea
           className="TextFields_textarea"
           rows="10"
@@ -84,7 +100,7 @@ const TextFields = () => {
         <button
           className="TextFields_button"
           onClick={(e) => handleSubmit(e, select)}
-          disabled={!validate(description, 3, 120) || !validate(title, 3, 10)}
+          // disabled={!validate(description, 3, 120) || !validate(title, 3, 10)}
         >
           Save
         </button>

@@ -10,19 +10,19 @@ export const notes = (state = initialState, action) => {
     case ADD_NOTE:
       return [action.data, ...state];
 
-    // case UPDATE_NOTE: {
-    //   const st = state.filter((item) => item.id === action.id)[0];
-    //   st.title = action.data.title;
-    //   st.description = action.data.description;
-    //   return [...state];
-    // }
-
     case UPDATE_NOTE: {
-      const index = action.id;
-      state[index].title = action.data.title;
-      state[index].description = action.data.description;
+      const st = state.filter((item) => item.id === action.id)[0];
+      st.title = action.data.title;
+      st.description = action.data.description;
       return [...state];
     }
+
+    // case UPDATE_NOTE: {
+    //   const index = action.id;
+    //   state[index].title = action.data.title;
+    //   state[index].description = action.data.description;
+    //   return [...state];
+    // }
 
     case DELETE_NOTE:
       return state.filter((item) => item.id !== action.id);

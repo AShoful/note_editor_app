@@ -24,11 +24,12 @@ export const updateNote = (id, data) => ({
   data,
 });
 
-export const removeNote = (id, isEnd, select) => {
+export const removeNote = (id, select, clearSearh) => {
   return async (dispatch) => {
+    dispatch(selectNote(select));
     dispatch(deleteNote(id));
-    if (isEnd) {
-      dispatch(selectNote(select - 1));
+    if (clearSearh) {
+      dispatch(searchNote(""));
     }
   };
 };

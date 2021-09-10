@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { selectNote } from "../../redux/action/action";
+import { searchNote, selectNote } from "../../redux/action/action";
+import { searchInNotes } from "../functions";
 import "./ListNotes.css";
 
 const ListNotes = () => {
@@ -27,8 +28,7 @@ const ListNotes = () => {
     });
   };
 
-  const notesAfterSearch =
-    search === "" ? notes : notes.filter((item) => item.title.includes(search));
+  const notesAfterSearch = searchInNotes(notes, search);
 
   if (sortByTitle) {
     notesAfterSearch.sort((a, b) => {
@@ -62,18 +62,23 @@ const ListNotes = () => {
       <button
         className="ListNotes_button"
         disabled={select === -1}
-        onClick={() => dispatch(selectNote(-1))}
+        onClick={() => dispatch(selectNote({}))}
       >
         + New
       </button>
       <div>
-        {notesAfterSearch.map((item, index) => (
+        {notesAfterSearch.map((item) => (
           <div
             key={item.id}
             className={
-              index !== select ? "ListNotes_title" : "ListNotes_title highlight"
+              item.id !== select.id
+                ? "ListNotes_title"
+                : "ListNotes_title highlight"
             }
-            onClick={() => dispatch(selectNote(index))}
+            onClick={() => {
+              dispatch(selectNote(item));
+              dispatch(searchNote(""));
+            }}
           >
             {item.title}
           </div>
