@@ -3,3 +3,7 @@ export const objectIsEmpty = (obj) =>
 
 export const searchInNotes = (notes, search) =>
   search === "" ? notes : notes.filter((item) => item.title.includes(search));
+
+export const validate = (str, right, left) => {
+  return str.length > right && str.length < left ? true : false;
+};

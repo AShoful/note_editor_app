@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../Search/Search";
 import { addNote, updateNote, removeNote } from "../../redux/action/action";
-import { objectIsEmpty } from "../functions";
+import { objectIsEmpty, validate } from "../functions";
 import "./TextFields.css";
 
 const TextFields = () => {
@@ -46,7 +46,7 @@ const TextFields = () => {
     }
   };
 
-  const hamdleRemote = (select) => {
+  const hamdleRemove = (select) => {
     if (objectIsEmpty(select)) {
       return;
     }
@@ -65,9 +65,6 @@ const TextFields = () => {
     }
   };
 
-  const validate = (str, right, left) => {
-    return str.length > right && str.length < left ? true : false;
-  };
   console.log("newSelect", select);
   console.log("newLeng", notes.length);
   return (
@@ -79,7 +76,7 @@ const TextFields = () => {
       >
         <div className="TextFields_div">
           <p>Title {validate(title, 3, 10) || "error"}</p>
-          <span className="material-icons" onClick={() => hamdleRemote(select)}>
+          <span className="material-icons" onClick={() => hamdleRemove(select)}>
             delete
           </span>
         </div>
@@ -100,7 +97,7 @@ const TextFields = () => {
         <button
           className="TextFields_button"
           onClick={(e) => handleSubmit(e, select)}
-          // disabled={!validate(description, 3, 120) || !validate(title, 3, 10)}
+          // disabled={!validate(description, 3, 120) || !validate(title, 3, 10) || objectIsEmpty(select)}
         >
           Save
         </button>
