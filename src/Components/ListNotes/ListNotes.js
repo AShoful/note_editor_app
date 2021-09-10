@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { searchNote, selectNote } from "../../redux/action/action";
+import { searchNote, selectNote, addNote } from "../../redux/action/action";
 import { searchInNotes } from "../functions";
 import "./ListNotes.css";
+
+const DEFAUL_NOTE = {
+  title: "default title",
+  description: "default description",
+};
 
 const ListNotes = () => {
   const notes = useSelector((state) => state.notes);
@@ -53,6 +58,13 @@ const ListNotes = () => {
     );
   };
 
+  const handleAddNewNote = () => {
+    DEFAUL_NOTE.id = Date.now();
+    const data = { ...DEFAUL_NOTE };
+    dispatch(addNote(data));
+    dispatch(selectNote(data));
+  };
+
   return (
     <div className="ListNotes">
       <div className="ListNotes_sortfields">
@@ -62,7 +74,7 @@ const ListNotes = () => {
       <button
         className="ListNotes_button"
         disabled={select === -1}
-        onClick={() => dispatch(selectNote({}))}
+        onClick={handleAddNewNote}
       >
         + New
       </button>

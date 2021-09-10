@@ -75,7 +75,7 @@ const TextFields = () => {
         onSubmit={(e) => handleSubmit(e, select)}
       >
         <div className="TextFields_div">
-          <p>Title {validate(title, 3, 10) || "error"}</p>
+          <p>Title {validate(title, 3, 40) || "error"}</p>
           <span className="material-icons" onClick={() => hamdleRemove(select)}>
             delete
           </span>
@@ -97,7 +97,10 @@ const TextFields = () => {
         <button
           className="TextFields_button"
           onClick={(e) => handleSubmit(e, select)}
-          // disabled={!validate(description, 3, 120) || !validate(title, 3, 10) || objectIsEmpty(select)}
+          disabled={
+            !validate(description, 3, 120) || !validate(title, 3, 30)
+            // objectIsEmpty(select)
+          }
         >
           Save
         </button>
