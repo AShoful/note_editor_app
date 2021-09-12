@@ -17,7 +17,7 @@ const TextFields = () => {
 
   useEffect(() => {
     setNotes(searchInNotes(notesInStore, search));
-  }, [notesInStore, search]);
+  }, [search, notesInStore]);
 
   useEffect(() => {
     if (!objectIsEmpty(select)) {
@@ -29,7 +29,8 @@ const TextFields = () => {
     }
   }, [select]);
 
-  const handleClick = (select) => {
+  const handleClick = (e, select) => {
+    e.preventDefault();
     setTouch(false);
     if (objectIsEmpty(select)) {
       const dataAdd = {
@@ -112,7 +113,7 @@ const TextFields = () => {
         />
         <button
           className="TextFields_button"
-          onClick={(e) => handleClick(select)}
+          onClick={(e) => handleClick(e, select)}
           disabled={!validate(description, 5, 500) || !validate(title, 3, 120)}
         >
           Save
