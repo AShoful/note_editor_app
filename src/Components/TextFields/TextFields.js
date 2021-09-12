@@ -82,7 +82,10 @@ const TextFields = () => {
               </small>
             )}
           </div>
-          <span className="material-icons" onClick={() => hamdleRemove(select)}>
+          <span
+            className="material-icons delete"
+            onClick={() => hamdleRemove(select)}
+          >
             delete
           </span>
         </div>

@@ -17,6 +17,7 @@
   border: 1px solid white;
   width: 140px;
   margin: 15px;
+  cursor: pointer;
 }
 
 .ListNotes_title {
@@ -29,6 +30,10 @@
 
 .highlight {
   border-color: rgb(73, 216, 80);
+}
+
+.sort {
+  cursor: pointer;
 }
 
 @media (max-width: 560px) {

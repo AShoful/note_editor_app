@@ -68,10 +68,12 @@ const ListNotes = () => {
   return (
     <div className="ListNotes">
       <div className="ListNotes_sortfields">
-        <div onClick={handleSortByTitle}>
+        <div className="sort" onClick={handleSortByTitle}>
           <span>Title</span> {viewSort(sortByTitle)}
         </div>
-        <div onClick={handleSortByDate}>Date {viewSort(sortByDate)}</div>
+        <div className="sort" onClick={handleSortByDate}>
+          <span>Date</span> {viewSort(sortByDate)}
+        </div>
       </div>
       <button className="ListNotes_button" onClick={handleAddNewNote}>
         + New
