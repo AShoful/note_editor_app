@@ -21,7 +21,7 @@
 
 .ListNotes_title {
   border: 1px solid white;
-  height: 45px;
+  min-height: 45px;
   margin: 15px;
   width: 80%;
   padding-left: 5px;

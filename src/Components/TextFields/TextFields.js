@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../Search/Search";
 import { addNote, updateNote, removeNote } from "../../redux/action/action";
-import { objectIsEmpty, validate, searchInNotes } from "../functions";
+import { objectIsEmpty, validate, searchInNotes } from "../utils";
 import "./TextFields.css";
 
 const TextFields = () => {
-  let select = useSelector((state) => state.select);
+  const select = useSelector((state) => state.select);
   const search = useSelector((state) => state.search);
   const notesInStore = useSelector((state) => state.notes);
-  // const notes = useSelector((state) => state.notes);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [notes, setNotes] = useState([]);
   const [touch, setTouch] = useState(false);
   const dispatch = useDispatch();
 
-  const notes = searchInNotes(notesInStore, search);
+  useEffect(() => {
+    setNotes(searchInNotes(notesInStore, search));
+  }, [notesInStore, search]);
 
   useEffect(() => {
     if (!objectIsEmpty(select)) {
@@ -25,10 +27,9 @@ const TextFields = () => {
       setTitle("");
       setDescription("");
     }
-  }, [notes, select]);
+  }, [select]);
 
-  const handleSubmit = (e, select) => {
-    e.preventDefault();
+  const handleClick = (select) => {
     setTouch(false);
     if (objectIsEmpty(select)) {
       const dataAdd = {
@@ -111,11 +112,8 @@ const TextFields = () => {
         />
         <button
           className="TextFields_button"
-          onClick={(e) => handleSubmit(e, select)}
-          disabled={
-            !validate(description, 5, 500) || !validate(title, 3, 120)
-            // objectIsEmpty(select)
-          }
+          onClick={(e) => handleClick(select)}
+          disabled={!validate(description, 5, 500) || !validate(title, 3, 120)}
         >
           Save
         </button>

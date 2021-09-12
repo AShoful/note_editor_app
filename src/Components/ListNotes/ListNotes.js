@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { selectNote, addNote } from "../../redux/action/action";
-import { searchInNotes } from "../functions";
+import { searchInNotes } from "../utils";
 import "./ListNotes.css";
 
 const DEFAULT_NOTE = {
@@ -87,7 +87,6 @@ const ListNotes = () => {
             }
             onClick={() => {
               dispatch(selectNote(item));
-              // dispatch(searchNote(""));
             }}
           >
             {item.title}
