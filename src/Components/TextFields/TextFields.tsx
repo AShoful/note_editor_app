@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../Search/Search";
 import { addNote, updateNote, removeNote } from "../../redux/action/action";
-import { objectIsEmpty, validate, searchInNotes } from "../utils";
+import { validate, searchInNotes } from "../utils";
 import "./TextFields.css";
+import { initialStateSelect } from "../../redux/reducer/select";
+import { INote, IState } from "../../redux/types";
 
 const TextFields = () => {
-  const select = useSelector((state) => state.select);
-  const search = useSelector((state) => state.search);
-  const notesInStore = useSelector((state) => state.notes);
+  const select = useSelector((state: IState): INote => state.select);
+  const search = useSelector((state: IState): string => state.search);
+  const notesInStore = useSelector((state: IState): INote[] => state.notes);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([] as INote[]);
   const [touch, setTouch] = useState(false);
   const dispatch = useDispatch();
 
@@ -20,7 +22,7 @@ const TextFields = () => {
   }, [search, notesInStore]);
 
   useEffect(() => {
-    if (!objectIsEmpty(select)) {
+    if (select.id) {
       setTitle(select.title);
       setDescription(select.description);
     } else {
@@ -29,10 +31,13 @@ const TextFields = () => {
     }
   }, [select]);
 
-  const handleClick = (e, select) => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    select: INote
+  ) => {
     e.preventDefault();
     setTouch(false);
-    if (objectIsEmpty(select)) {
+    if (!select.id) {
       const dataAdd = {
         id: Date.now(),
         title,
@@ -43,6 +48,7 @@ const TextFields = () => {
       setDescription("");
     } else {
       const dataUpdate = {
+        id: select.id,
         title,
         description,
       };
@@ -50,12 +56,12 @@ const TextFields = () => {
     }
   };
 
-  const hamdleRemove = (select) => {
-    if (objectIsEmpty(select)) {
+  const hamdleRemove = (select: INote) => {
+    if (!select.id) {
       return;
     }
     if (notes.length === 1) {
-      return dispatch(removeNote(notes[0].id, {}, true));
+      return dispatch(removeNote(notes[0].id, initialStateSelect, true));
     }
     const indexSelect = notes.indexOf(select);
     if (indexSelect === notes.length - 1) {
@@ -76,7 +82,7 @@ const TextFields = () => {
         <div className="TextFields_div">
           <div>
             <p className="TextFields_p">Title</p>
-            {validate(title, 3, 120, touch) || !touch || (
+            {validate(title, 3, 120) || !touch || (
               <small className="TextFields_small">
                 the length TITLE must be between 3 and 120 characters
               </small>
@@ -106,8 +112,7 @@ const TextFields = () => {
         )}
         <textarea
           className="TextFields_textarea"
-          rows="6"
-          type="text"
+          rows={6}
           onChange={(e) => {
             setDescription(e.target.value);
             if (!touch) setTouch(true);
@@ -116,7 +121,9 @@ const TextFields = () => {
         />
         <button
           className="TextFields_button"
-          onClick={(e) => handleClick(e, select)}
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+            handleClick(e, select)
+          }
           disabled={!validate(description, 5, 500) || !validate(title, 3, 120)}
         >
           Save

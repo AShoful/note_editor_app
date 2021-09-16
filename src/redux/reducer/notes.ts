@@ -1,11 +1,20 @@
 import { ADD_NOTE, DELETE_NOTE, UPDATE_NOTE } from "../actionTypes";
 import { load } from "redux-localstorage-simple";
+import { ActionTypes, INote } from "../types";
 
-const savedNotes = load({ namespace: "note-list" });
+interface ISaveLoad {
+  [key: string]: any;
+}
 
-const initialState = savedNotes && savedNotes.notes ? savedNotes.notes : [];
+const savedNotes: ISaveLoad = load({ namespace: "note-list" });
 
-export const notes = (state = initialState, action) => {
+const initialState: INote[] =
+  savedNotes && savedNotes.notes ? savedNotes.notes : [];
+
+export const notes = (
+  state: INote[] = initialState,
+  action: ActionTypes
+): INote[] => {
   switch (action.type) {
     case ADD_NOTE:
       return [action.data, ...state];

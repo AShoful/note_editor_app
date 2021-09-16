@@ -4,11 +4,12 @@ import { combinedReducer } from "./reducer";
 import { save } from "redux-localstorage-simple";
 
 const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  typeof window === "object" &&
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
-const configureStore = (preloadedState) =>
+const configureStore = (preloadedState: any) =>
   createStore(
     combinedReducer,
     preloadedState,

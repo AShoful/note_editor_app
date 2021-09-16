@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { selectNote, addNote } from "../../redux/action/action";
 import { searchInNotes } from "../utils";
 import "./ListNotes.css";
+import { IState } from "../../redux/types";
 
 const DEFAULT_NOTE = {
   title: "default title",
@@ -11,9 +12,9 @@ const DEFAULT_NOTE = {
 };
 
 const ListNotes = () => {
-  const notes = useSelector((state) => state.notes);
-  const select = useSelector((state) => state.select);
-  const search = useSelector((state) => state.search);
+  const notes = useSelector((state: IState) => state.notes);
+  const select = useSelector((state: IState) => state.select);
+  const search = useSelector((state: IState) => state.search);
   const dispatch = useDispatch();
 
   const [sortByTitle, setSortByTitle] = useState(0);
@@ -49,7 +50,7 @@ const ListNotes = () => {
     notesAfterSearch.sort((a, b) => sortByDate * (a.id - b.id));
   }
 
-  const viewSort = (sort) => {
+  const viewSort = (sort: number) => {
     if (!sort) return null;
     return sort > 0 ? (
       <span className="material-icons">keyboard_arrow_up</span>
@@ -59,8 +60,7 @@ const ListNotes = () => {
   };
 
   const handleAddNewNote = () => {
-    DEFAULT_NOTE.id = Date.now();
-    const data = { ...DEFAULT_NOTE };
+    const data = { ...DEFAULT_NOTE, id: Date.now() };
     dispatch(addNote(data));
     dispatch(selectNote(data));
   };
