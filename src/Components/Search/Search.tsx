@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { searchNote } from "../../redux/action/action";
+import { searchNote, selectNote } from "../../redux/action/action";
 import "./Search.css";
 import { IState } from "../../redux/types";
+import { initialStateSelect } from "../../redux/reducer/select";
 
 const Search = () => {
   const search = useSelector((state: IState) => state.search);
@@ -9,6 +10,7 @@ const Search = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const str = e.target.value;
+    dispatch(selectNote(initialStateSelect));
     dispatch(searchNote(str.trim()));
   };
 
